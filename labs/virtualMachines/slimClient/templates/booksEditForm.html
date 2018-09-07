@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+<script src="../../public/script.js"></script>
+<h1><?php echo $title; ?></h1>
+<form id='booksEditForm' data_id = "<?php echo $book['id']; ?>">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input name="name" type="text" class="form-control" id="name" placeholder="<?php echo $name['id']; ?>">
+  </div>
+  <div class="form-group">
+    <label for="author">Author</label>
+    <input name="author" type="text" class="form-control" id="author" placeholder="<?php echo $author['id']; ?>">
+  </div>
+  <div class="form-group">
+    <label for="year">Year</label>
+    <input name="year" type="text" class="form-control" id="year" placeholder="<?php echo $year['id']; ?>">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

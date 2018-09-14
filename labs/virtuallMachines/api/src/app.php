@@ -50,7 +50,7 @@ class App
     $app->get('/books/{id}', function (Request $request, Response $response, array $args) {
       // gets id from the parameters to use for the query
       $id = $args['id'];
-      $this->logger->addInfo("GET /$books/".$id);
+
       // query
       $books = $this->db->query('SELECT * from books where id='.$id)->fetch();
 
@@ -95,7 +95,7 @@ class App
     */
     $app->put('/books/{id}', function (Request $request, Response $response, array $args) {
       $id = $args['id'];
-      $this->logger->addInfo("PUT /$books/".$id);
+    
 
       // checks if books exists
       $books = $this->db->query('SELECT * from books where id='.$id)->fetch();

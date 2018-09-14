@@ -6,18 +6,18 @@
 </head>
 <script src="../../public/script.js"></script>
 <h1><?php echo $title; ?></h1>
-<form id='booksEditForm' data_id = "<?php echo $book['id']; ?>">
+<form id='booksEdit' data_id = "<?php echo $book['id']; ?>">
   <div class="form-group">
     <label for="name">Name</label>
-    <input name="name" type="text" class="form-control" id="name" placeholder="<?php echo $name['id']; ?>">
+    <input name="name" type="text" class="form-control" id="name" placeholder="<?php echo ($books['name']); ?>">
   </div>
   <div class="form-group">
     <label for="author">Author</label>
-    <input name="author" type="text" class="form-control" id="author" placeholder="<?php echo $author['id']; ?>">
+    <input name="author" type="text" class="form-control" id="author" placeholder="<?php echo ($books['author']); ?>">
   </div>
   <div class="form-group">
     <label for="year">Year</label>
-    <input name="year" type="text" class="form-control" id="year" placeholder="<?php echo $year['id']; ?>">
+    <input name="year" type="text" class="form-control" id="year" placeholder="<?php echo ($books['year']); ?>">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

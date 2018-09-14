@@ -45,8 +45,8 @@ class App
          $tableRows = $tableRows . "<tr>";
          $tableRows = $tableRows . "<td>".$books["name"]."</td><td>".$books["author"]."</td><td>".$books["year"]."</td>";
          $tableRows = $tableRows . "<td>
-         <a href='http://localhost:3000/slimClient/books/".$books["id"]."/view' class='btn btn-primary'>View Details</a>
-         <a href='http://localhost:3000/slimClient/books/".$books["id"]."/edit' class='btn btn-secondary'>Edit</a>
+         <a href='http://localhost:8080/slimClient/books/".$books["id"]."/view' class='btn btn-primary'>View Details</a>
+         <a href='http://localhost:8080/slimClient/books/".$books["id"]."/edit' class='btn btn-secondary'>Edit</a>
          <a data-id='".$books["id"]."' class='btn btn-danger deletebtn'>Delete</a>
 
          </td>";
@@ -60,9 +60,16 @@ class App
        return $this->renderer->render($response, "/books.html", $templateVariables);
      });
 
+     //endpoint that will allow user to add a new books to the interface. Uses the bookssForm.html for the interface
+     $app->get('/books/add', function(Request $request, Response $response) {
+       $templateVariables = [
+         "type" => "new",
+         "title" => "Add new books"
+       ];
+       return $this->renderer->render($response, "/booksForm.html", $templateVariables);
+     });
 
-
-     $app->get('/books/{id}/view', function (Request $request, Response $response, array $args) {
+     $app->get('/books/{id}', function (Request $request, Response $response, array $args) {
         $id = $args['id'];
         $responseRecords = makeApiRequest('books/'.$id);
         $templateVariables = [
@@ -70,6 +77,7 @@ class App
           "book" => $responseRecords
         ];
         return $this->renderer->render($response, "/booksPage.html", $templateVariables);
+        return $response;
      });
 
 
@@ -81,20 +89,8 @@ class App
            "title" => "Edit books",
            "books" => $responseRecord
          ];
-         var_dump($responseRecord);
          return $this->renderer->render($response, "/booksEdit.html", $templateVariables);
 
-     });
-
-
-
-     //endpoint that will allow user to add a new books to the interface. Uses the bookssForm.html for the interface
-     $app->get('/books/add', function(Request $request, Response $response) {
-       $templateVariables = [
-         "type" => "new",
-         "title" => "Add new books"
-       ];
-       return $this->renderer->render($response, "/booksForm.html", $templateVariables);
      });
 
      $this->app = $app;

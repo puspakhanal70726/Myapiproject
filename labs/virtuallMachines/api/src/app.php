@@ -101,6 +101,7 @@ class App
       $books = $this->db->query('SELECT * from books where id='.$id)->fetch();
       if(!$books){
         $errorData = array('status' => 404, 'message' => 'not found');
+        console.log($id);
         $response = $response->withJson($errorData, 404);
         return $response;
       }
@@ -124,6 +125,7 @@ class App
         $this->db->exec($updateString);
       } catch (\PDOException $e) {
         $errorData = array('status' => 400, 'message' => 'Invalid data provided to update');
+        echo ("hi there");
         return $response->withJson($errorData, 400);
       }
 
@@ -132,75 +134,6 @@ class App
       $jsonResponse = $response->withJson($books);
       return $jsonResponse;
     });
-
-    /*
-    Function will add a row to the books table with the information provided.
-    Similar to the update function, it constructs an INSERT query based on the data
-    sent to it
-
-    Test curl for adding a new books, id may need to be changed
-
-    curl -X POST \
-    http://192.168.33.10/api/books \
-    -H 'Cache-Control: no-cache' \
-    -H 'Content-Type: application/x-www-form-urlencoded' \
-    -H 'Postman-Token: a23837f2-2b01-4776-89a8-8b528bd94aec' \
-    -d 'id=12&name=Doom&year=2016&console=PS4'
-    */
-    // $app->post('/books', function (Request $request, Response $response, array $args) {
-    //   $id = 1;
-    //   $this->logger->addInfo("POST /books");
-    //
-    //   $addString = "INSERT INTO books ";
-    //   $addString = $addString . "(";
-    //
-    //   $fields = $request->getParsedBody();
-    //   $keysArray = array_keys($fields);
-    //   $last_key = end($keysArray);
-    //
-    //   // first loop adds the different column names
-    //   foreach($fields as $field => $value) {
-    //     $addString = $addString . "$field";
-    //     if( $field != $last_key) {
-    //       // adds the comma between values
-    //       $addString = $addString . ", ";
-    //     }
-    //     if($field == "id"){
-    //       $id = $value;
-    //     }
-    //   }
-    //
-    //   $addString = $addString . ") VALUES (";
-    //   // second loop adds the values for each of the columns
-    //   foreach($fields as $field => $value) {
-    //     //adds quotes for the 2 strings that could be used for the query
-    //     if($field == "name" || $field == "console") {
-    //       $addString = $addString . " '$value' ";
-    //     }
-    //     //numbers
-    //     else {
-    //       $addString = $addString . "$value";
-    //     }
-    //     if($field != $last_key) {
-    //       $addString = $addString . ", ";
-    //     }
-    //   }
-    //   // closes the create query from the information sent
-    //   $addString = $addString . ");";
-    //
-    //   // execute query
-    //   var_dump($addString);
-    //   try {
-    //     $this->db->exec($addString);
-    //   } catch (\PDOException $e) {
-    //     $errorData = array('status' => 400, 'message' => 'Invalid data provided to update');
-    //     return $response->withJson($errorData, 400);
-    //   }
-    //   $books = $this->db->query('SELECT * from books where id='.$id)->fetch();
-    //   $jsonResponse = $response->withJson($books);
-    //   return $jsonResponse;
-    // });
-
 
     $app->post('/books', function (Request $request, Response $response) {
         $this->logger->addInfo("POST /books/");
